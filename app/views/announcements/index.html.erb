@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="small-12 medium-12 large-12 columns  swedew">
+    <table id="clients" class="display">
+      <thead>
+      <tr>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @announcements.each do |announcement| %>
+          <tr>
+            <td>
+              <%= announcement.title %>
+            </td>
+            <td>
+              <%= announcement.text %>
+            </td>
+             </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

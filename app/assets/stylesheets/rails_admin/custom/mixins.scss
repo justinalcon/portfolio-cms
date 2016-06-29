@@ -1,0 +1,61 @@
+#spark_published_field {
+	clear: both;
+}
+
+#spark_published_field .col-sm-2.control-label {
+	margin: 10px 0 0 0;
+}
+
+#spark_published {
+  position: relative;
+  display: inline-block;
+  -webkit-appearance: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+}
+
+#spark_published {
+  background-color: #F71717;
+}
+
+#spark_published:checked {
+  background-color: #0EA70E;
+}
+
+#spark_published:before {
+  content: 'False';
+  display: block;
+}
+
+#spark_published:after {
+  content: 'True';
+  display: none;
+}
+
+#spark_published:checked:before {
+  display: none;
+}
+
+#spark_published:checked:after {
+  display: block;
+}
+
+#spark_published_field .checkbox {
+  width: 60px;
+}
+
+#edit_user #user_password_field, #edit_user #user_password_confirmation_field, .forgotpasswordmessages #error_explanation h2 {
+  display: none;
+} 
+

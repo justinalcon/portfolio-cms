@@ -1,0 +1,43 @@
+<body>
+
+<%= @test %>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+var user = {
+    id: '1', "authenticity_token": "<%= form_authenticity_token %>" 
+}
+console.log( "fewfwf" ); 
+// Post data via ajax to a rails controller
+//$.post('http://localhost:3000/users', user);
+
+/*
+
+jQuery.post( "http://localhost:3000/sparks/1", user, function( data ) {
+
+  console.log( data ); 
+
+});
+*/
+
+
+$.ajax({
+    type: "GET",
+    url: "/sparks/1",
+    dataType: "json",
+    success: function(data){
+        alert(data.title) // Will alert Max
+    }        
+})
+
+
+/*
+$.getJSON("/sparks/1?callback=?", function(data){
+          console.log(data);
+        });
+
+*/
+
+</script>
+</body>
+
+

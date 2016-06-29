@@ -1,0 +1,10 @@
+// Add custom CSS for help text on rails_admin edit forms
+.help-block {
+  
+  line-height: 1.6;
+  padding-right: 25%;
+
+  ul {
+    margin-top: 10px;
+  }
+}
