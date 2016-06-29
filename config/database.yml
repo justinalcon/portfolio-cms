@@ -7,7 +7,7 @@
 default: &default
     adapter: mysql2
     encoding: utf8
-    database: <%= ENV.fetch('DB_NAME', 'twenty_three_stories') %>
+    database: <%= ENV.fetch('DB_NAME', 'portfolio_cms') %>
     username: <%= ENV.fetch('DB_USER', 'root') %>
     password: <%= ENV.fetch('DB_PASWORD', '') %>
     host: <%= ENV.fetch('DB_HOST', '127.0.0.1') %>
@@ -20,8 +20,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV.fetch('DB_TEST', 'twenty_three_stories_test') %>
+  database: <%= ENV.fetch('DB_TEST', 'portfolio_cms_test') %>
 
 production:
   <<: *default
-  database: <%= ENV.fetch('DB_PRODUCTION', 'twenty_three_stories') %>
+  database: <%= ENV.fetch('DB_PRODUCTION', 'portfolio_cms') %>

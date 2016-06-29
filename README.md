@@ -1,8 +1,8 @@
 ¸.·´¯`·.´¯`·.¸¸.·´¯`·.¸><(((º>
 
-  This is a place to store and view sparks (ideas)
+  This is the CMS that controls the portfolio front end
         
-# Deploying to the 23 Stories shared server (Ubuntu 14.04) - because the server is shared many if not all of these dependencies are likely already installed - these instructions are for starting from scratch
+# Deploying to Ubuntu 14.04
   
 ### rbenv / ruby
   
@@ -40,9 +40,10 @@
     $ sudo apt-get install imagemagick
   
 ### get the code
-    $ ssh-keygen -t rsa -b 4096 -C "developer@23stories.com"
-    $ git clone REPO
-    $ cd REPO
+    FORK THIS REPOSITORY
+    $ ssh-keygen -t rsa -b 4096 -C "justin@justinalcon.com"
+    $ git clone YOUR FORK
+    $ cd portfolio-cms
     $ bundle install
     $ RAILS_ENV=production rake assets:precompile
     $ RAILS_ENV=production rake db:create 
@@ -76,25 +77,25 @@
   
 ### configure apache
   
-    $ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/discovery.conf
-    $ sudo vi /etc/apache2/sites-available/discovery.conf
+    $ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/portfolio-cms.conf
+    $ sudo vi /etc/apache2/sites-available/portfolio-cms.conf
    
     <VirtualHost *:80>
-        ServerName cnstudiodev.com
-        ServerAlias cms.discovery.cnstudiodev.com
-        ServerAdmin CN_Studio_Infrastructure@condenast.com
-        DocumentRoot /home/ubuntu/discovery/public
+        ServerName yourportfolio.com
+        ServerAlias yourportfolio.com
+        ServerAdmin justin@justinalcon.com
+        DocumentRoot /home/ubuntu/portfolio-cms/public
         RailsEnv production
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
-        <Directory "/home/ubuntu/discovery/public">
+        <Directory "/home/ubuntu/portfolio-cms/public">
             Options FollowSymLinks
             Require all granted
         </Directory>
     </VirtualHost>
   
     $ sudo a2dissite 000-default
-    $ sudo a2ensite discovery
+    $ sudo a2ensite portfolio-cms
   
     $ sudo service apache2 restart            
           
@@ -246,9 +247,8 @@
  
 ### The Code
  
- 1. Fork https://bitbucket.org/cnstudiotech/discovery.git to your personal BitBucket account
- 2. Clone your forked repo to your local computer (`$ git clone git@bitbucket.org:<YOUR_USERNAME>/discovery.git`)
- 3. Add a remote for fetching upstream changes (`$ git remote add 23Stories git@bitbucket.org:cnstudiotech/discovery.git`)
+ 1. Fork this repository
+ 2. Clone your forked repo to your local computer
  4. Install gem dependencies with bundler (`$ bundle install`)
  
 ##Running the code
@@ -264,168 +264,3 @@
  
  You should now have the site up and running at [http://localhost:3000](http://localhost:3000)
 
-### API
-
-Always start by logging in the user with the POST /api/login endpoint, you will need the token from its response in subsequent calls
-
-#### POST /api/login.json?email=USER_EMAIL&password=USER_PASSWORD
-
-parameter `email` string - the email of the user to log in
-
-parameter `password` string - the password of the user to log in
-
-
-    STATUS `401` means that the username and password provided are not a match.
-
-    STATUS `422` means that the request is not well formed please check your parameters.
-
-    STATUS `200` means that you are good to go and has this response:
-
-    `**/callback([{"message":"d995b6b901342d93f7460706fde5e8b3","user_role":"nontech"}])` (this is a session token, keep track of it in your app)
-
-    possible values of user roles are `admin`, `tech`, or `nontech`
-
-#### GET /tags.json?jsoncallback=callback&token=TOKEN_FROM_LOGIN
-
-parameter `jsoncallback` string - name of method used as callback
-
-parameter `token` string - this is the session token supplied by POST /api/login
-
-    STATUS 200
-
-    /**/callback(
-      [
-        {
-          id: 1,
-          tag: "billy"
-        },
-        {
-          id: 2,
-          tag: "justin"
-        }
-      ]
-    )
-
-#### GET /sparks.json?start=OFFSET&limit=LIMIT&tags=COMMA_SEPARATED_TAGS&jsoncallback=callback&token=TOKEN_FROM_LOGIN
-
-parameter `start` integer - offset or records to skip default is 0 (optional)
-
-parameter `limit` integer - number of records to return defualt is 10 (optional)
-
-parameter `tags` string - comma separated list of tags to filter on defualt is all or * (optional)
-
-parameter `jsoncallback` string - name of method used as callback
-
-parameter `token` string - this is the session token supplied by POST /api/login
-
-
-    STATUS 200
-
-    /**/callback(
-    [
-    {
-      id: 7,
-      title: "jsutin 5",
-      summary: "",
-      dev_notes: "",
-      direct_link: "",
-      canned_video: {
-        url: null
-      },
-      created_at: "2016-02-18T17:57:08.000Z",
-      updated_at: "2016-02-18T17:57:08.000Z",
-      user_id: 2,
-      published: false,
-      longform: "",
-      video_url: "",
-      tags: [
-      {
-        id: 2,
-        tag: "justin"
-      },
-      {
-        id: 1,
-        tag: "billy"
-      }
-      ],
-      images: [
-              {
-                id: 1,
-                location: {
-                  url: "/uploads/image/location/1/20142126-600.jpg",
-                  four_hundred_by_three_hundred: {
-                    url: "/uploads/image/location/3/four_hundred_by_three_hundred_awesome.jpg"
-                  }
-                }
-              }
-           ]
-      }],
-      user: {
-        id: 1,
-        email: "lddewis@email.com",
-        created_at: "2016-02-11T21:27:12.000Z",
-        updated_at: "2016-02-29T19:27:07.000Z",
-        role: "admin",
-        username: "Lewis",
-        session_token: "ragrqgregeqrgqe"
-      }
-    )
-
-#### GET /sparks/{id}.json?&jsoncallback=callback&token=TOKEN_FROM_LOGIN
-
-parameter `id` integer - the id of the spark that you would like to get
-
-parameter `jsoncallback` string - name of method used as callback
-
-parameter `token` string - this is the session token supplied by POST /api/login
-
-    STATUS 404 means that a spark with the passed id does not exist
-
-    STATUS 200 returns:
-
-    /**/ callback({
-      id: 1,
-      title: "wefwef",
-      summary: "efwfewf",
-      dev_notes: "ewfewfwfe",
-      direct_link: "http://direct-link.com",
-      canned_video: {
-        url: "/uploads/spark/canned_video/1/toystory.mp4"
-      },
-      created_at: "2016-02-12T17:11:03.000Z",
-      updated_at: "2016-02-16T16:58:51.000Z",
-      user_id: 1,
-      published: true,
-      longform: "<p><strong>&nbsp;wefqfwefwe &nbsp;<em><u>wefwefwfwf</u></em></strong></p> ",
-      video_url: "http://green.com/video.mp4",
-      tags: [{
-        id: 1,
-        tag: "Lewis"
-      }],
-      images: [{
-        id: 2,
-        location: {
-          url: "/uploads/image/location/2/Lincoln_Email_rsvep.png",
-          four_hundred_by_three_hundred: {
-            url: "/uploads/image/location/3/four_hundred_by_three_hundred_awesome.jpg"
-          }
-        }
-      }, {
-        id: 1,
-        location: {
-          url: "/uploads/image/location/1/20142126-600.jpg",
-          four_hundred_by_three_hundred: {
-            url: "/uploads/image/location/3/four_hundred_by_three_hundred_awesome.jpg"
-          }
-        }
-      }],
-      user: {
-        id: 1,
-        email: "lddewis@email.com",
-        created_at: "2016-02-11T21:27:12.000Z",
-        updated_at: "2016-02-29T19:27:07.000Z",
-        role: "admin",
-        username: "Lewis",
-        session_token: "ragrqgregeqrgqe"
-      }
-    }

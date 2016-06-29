@@ -1,1 +1,1 @@
-user = User.create! email: 'admin@23Stories.com',  password: '235t0r135', password_confirmation: '235t0r135', role: 'admin', username: 'admin'
+user = User.create! email: 'justin@justinalcon.com',  password: 'p0rtf0l10', password_confirmation: 'p0rtf0l10', role: 'admin', username: 'justin'

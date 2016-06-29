@@ -37,25 +37,15 @@ group :development do
   gem 'guard-rspec', require: false
 end
 
-# 23 stories added gems start here
-
 
 gem 'rails_admin'
 
 # controller
 gem 'responders', '~> 2.0'
-#gem 'cancan', '~> 1.6', '>= 1.6.10'
 
 # authentication
 gem 'devise'
 gem 'mailgun_rails'
-
-# authorization
-
-#gem 'supermodel', '~> 0.1.6'
-
-#roles
-#gem 'rolify', '~> 5.0'
 
 group :test do
   #test
@@ -64,16 +54,14 @@ group :test do
 end
 
 # DB
-gem 'mysql2', '~> 0.3.13'
+gem 'mysql2'
 
-
+# configuration
 gem 'dotenv-rails'
-
-#ck editor
-gem 'ckeditor'
 
 #uploads
 gem 'carrierwave'
+
 # thumbs
 gem 'mini_magick'
 

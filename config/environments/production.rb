@@ -79,14 +79,13 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-      api_key: 'key-40ac1a4ebc34b0f73c449b03e9eca66d',
-      domain: 'cnstudiodev.com'
+      api_key: 'YOUR_KEY_HERE',
+      domain: 'justinalcon.com'
   }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = {:host => 'cms.discovery.cnstudiodev.com'}
+  config.action_mailer.default_url_options = {:host => 'justinalcon.com'}
 
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.precompile += %w( .svg .eot .woff .ttf)
-  config.assets.precompile += %w( ckeditor/*)
 end
