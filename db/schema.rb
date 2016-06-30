@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630015023) do
+ActiveRecord::Schema.define(version: 20160630162833) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 20160630015023) do
   create_table "expertise_organizations", force: :cascade do |t|
     t.integer "organization_id", limit: 4
     t.integer "expertise_id",    limit: 4
+  end
+
+  create_table "expertise_projects", force: :cascade do |t|
+    t.integer "project_id",   limit: 4
+    t.integer "expertise_id", limit: 4
   end
 
   create_table "expertise_specialties", force: :cascade do |t|
@@ -45,6 +50,11 @@ ActiveRecord::Schema.define(version: 20160630015023) do
     t.integer "spark_id", limit: 4
   end
 
+  create_table "organization_projects", force: :cascade do |t|
+    t.integer "project_id",      limit: 4
+    t.integer "organization_id", limit: 4
+  end
+
   create_table "organization_specialties", force: :cascade do |t|
     t.integer "specialty_id",    limit: 4
     t.integer "organization_id", limit: 4
@@ -61,6 +71,25 @@ ActiveRecord::Schema.define(version: 20160630015023) do
     t.string "position",    limit: 255
     t.string "location",    limit: 255
     t.text   "description", limit: 65535
+  end
+
+  create_table "project_organizations", force: :cascade do |t|
+    t.integer "project_id",      limit: 4
+    t.integer "organization_id", limit: 4
+  end
+
+  create_table "project_specialties", force: :cascade do |t|
+    t.integer "project_id",   limit: 4
+    t.integer "specialty_id", limit: 4
+  end
+
+  create_table "project_technologies", force: :cascade do |t|
+    t.integer "project_id",    limit: 4
+    t.integer "technology_id", limit: 4
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", limit: 255
   end
 
   create_table "rich_rich_files", force: :cascade do |t|

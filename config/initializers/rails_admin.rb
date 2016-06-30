@@ -33,6 +33,121 @@ RailsAdmin.config do |config|
     # history_show
   end
 
+  config.model 'ExpertiseOrganization' do
+    visible false
+  end
+
+  config.model 'ExpertiseSpecialty' do
+    visible false
+  end
+
+  config.model 'ExpertiseTechnology' do
+    visible false
+  end
+
+  config.model 'OrganizationSpecialty' do
+    visible false
+  end
+
+  config.model 'OrganizationTechnology' do
+    visible false
+  end
+
+  config.model 'SpecialtyTechnology' do
+    visible false
+  end
+
+  config.model 'ExpertiseProject' do
+    visible false
+  end
+
+  config.model 'OrganizationProject' do
+    visible false
+  end
+
+  config.model 'ProjectTechnology' do
+    visible false
+  end
+
+  config.model 'ProjectSpecialty' do
+    visible false
+  end
+
+  config.model 'Technology' do
+    configure :organization_technologies do
+      hide
+    end
+    configure :expertise_technologies do
+      hide
+    end
+    configure :specialty_technologies do
+      hide
+    end
+    configure :project_technologies do
+      hide
+    end
+  end
+
+  config.model 'Specialty' do
+    configure :specialty_technologies do
+      hide
+    end
+    configure :organization_specialties do
+      hide
+    end
+    configure :expertise_specialties do
+      hide
+    end
+    configure :project_specialties do
+      hide
+    end
+  end
+
+  config.model 'Project' do
+    configure :project_specialties do
+      hide
+    end
+    configure :organization_projects do
+      hide
+    end
+    configure :expertise_projects do
+      hide
+    end
+    configure :project_technologies do
+      hide
+    end
+  end
+
+  config.model 'Organization' do
+    configure :expertise_organizations do
+      hide
+    end
+    configure :organization_technologies do
+      hide
+    end
+    configure :organization_specialties do
+      hide
+    end
+    configure :organization_projects do
+      hide
+    end
+  end
+
+  config.model 'Expertise' do
+    configure :expertise_organizations do
+      hide
+    end
+    configure :expertise_technologies do
+      hide
+    end
+    configure :expertise_specialties do
+      hide
+    end
+    configure :expertise_projects do
+      hide
+    end
+  end
+
   config.model 'User' do
     edit do
       configure :sign_in_count do
