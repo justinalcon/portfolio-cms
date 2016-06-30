@@ -26,7 +26,7 @@ class TechnologiesController < ApplicationController
 
   def respond_with_success
     respond_to do |format|
-      format.json { render :json => @techs.to_json(include: [:tags, :images, :user]), callback: params[:jsoncallback] }
+      format.json { render :json => @techs.to_json(include: [:expertise, :organizations, :projects, :specialties]), callback: params[:jsoncallback] }
       format.html { redirect_to('/admin') }
     end
   end

@@ -263,4 +263,107 @@
  `$ bundle exec guard`
  
  You should now have the site up and running at [http://localhost:3000](http://localhost:3000)
+ 
+### API
+ 
+Always start by logging in the user with the POST /api/login endpoint, you will need the token from its response in subsequent calls
+ 
+#### POST /api/login.json?email=USER_EMAIL&password=USER_PASSWORD
+ 
+ parameter `email` string - the email of the user to log in
+ 
+ parameter `password` string - the password of the user to log in
+ 
+ 
+     STATUS `401` means that the username and password provided are not a match.
+ 
+     STATUS `422` means that the request is not well formed please check your parameters.
+ 
+     STATUS `200` means that you are good to go and has this response:
+ 
+     `**/callback([{"message":"d995b6b901342d93f7460706fde5e8b3","user_role":"nontech"}])` (this is a session token, keep track of it in your app)
+ 
+     possible values of user roles are `admin`, `tech`, or `nontech`
 
+
+#### GET /technologies.json?jsoncallback=callback&token=TOKEN_FROM_LOGIN
+ 
+  parameter `jsoncallback` string - name of method used as callback
+
+  parameter `token` string - this is the session token supplied by POST /api/login
+
+    STATUS 200
+
+    /**/callback(
+        [
+            {
+                id: 1,
+                name: "Ruby on Rails",
+                expertise: [
+                    {
+                        id: 1,
+                        name: "Team Leadership"
+                    },
+                    {
+                        id: 2,
+                        name: "Product and Roadmap creation and maintenance"
+                    },
+                    {
+                        id: 3,
+                        name: "Social Media Best Practices"
+                    },
+                    {
+                        id: 4,
+                        name: "Technical Presentations"
+                    }
+                ],
+                organizations: [
+                    {
+                        id: 2,
+                        name: "Conde Nast - 23Stories",
+                        dates: "November 2015 to present",
+                        position: "Sr. Software Engineer",
+                        location: "New York, NY",
+                        description: "Leads a small team of developers using agile development to create complex software related to branded content. Works with multiple nationally known brands at once to create branded content technology. Implements Rails,JavaScript, jQuery, NodeJS, and PHP and other technologies to create and maintain high traffic advertising-related websites Implements PHP and JavaScript to create products leveraging the APIs of large corporate partners including Snapchat, Google, Twitter, Facebook and Tumblr. Sets and meet aggressive goals for an agile team of scrum developers who create innovative products with cutting edge internet technologies. Creates and maintain service-oriented architecture using AWS cloud-based technology. Designs, implements, and maintains a complex suite of “social listening” software that integrates advertising and social products. "
+                    },
+                    {
+                        id: 3,
+                        name: "Studio 3 Partners (EPIX)",
+                        dates: "January 2015 - November 2015",
+                        position: "Senior Rails Developer",
+                        location: "New York, NY",
+                        description: "Led a team of developers, QA engineers, and producers to create several film-related digital products, including the EPIX core API. Managed third party partners on behalf of the company Led the production process for the API Deployed the code Led and participates in an agile technical process which delivers quality code to production on time, mostly RoR Chose appropriate technologies Designed and implemented a service-oriented architecture using Amazon Web Services Represented the company at professional conferences and events such as RailsConf ATL Reported to VP of Engineering and contributed to technical goals and strategies "
+                    },
+                    {
+                        id: 4,
+                        name: "FilmBuff",
+                        dates: "January 2013 - January 2015",
+                        position: "Head of Technology",
+                        location: "New York, NY",
+                        description: "Led a team of developers, designers, and producers to create several film-related digital products, including filmbuff.com Led the product process for all filmbuff.com digital products Led and participated in an agile technical process which delivers quality code to production on time, mostly RoR Chose appropriate technologies Set and enforced the standard for feature completeness, code reviews, and testing Designed and implements a service-oriented architecture using Amazon Web Services Organized company-wide participatory events related to technology and film Represented the company at professional conferences and events such as SXSW Reported directly to CEO and contributed to business goals and strategies Managed third party partners on behalf of the company Drove the hiring process for technical and design positions "
+                    }
+                ],
+                 projects: [
+                    {
+                        id: 1,
+                        name: "Mauka"
+                    },
+                    {
+                        id: 2,
+                        name: "FilmBuff Partner Dashboard"
+                    }
+                ],
+                specialties: [
+                    {
+                        id: 1,
+                        name: "Agile Development"
+                    },
+                    {
+                        id: 2,
+                        name: "RESTful APIs"
+                    }
+                ]
+            },
+            
+        ]
+    )
