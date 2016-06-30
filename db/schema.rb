@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630005920) do
+ActiveRecord::Schema.define(version: 20160630013133) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -31,7 +31,11 @@ ActiveRecord::Schema.define(version: 20160630005920) do
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string "name",        limit: 255
+    t.string "dates",       limit: 255
+    t.string "position",    limit: 255
+    t.string "location",    limit: 255
+    t.text   "description", limit: 65535
   end
 
   create_table "rich_rich_files", force: :cascade do |t|
