@@ -10,5 +10,7 @@ class Technology < ActiveRecord::Base
   has_many :project_technologies
   has_many :projects, through: :project_technologies
 
+  has_many :images, :dependent => :destroy, :inverse_of => :technology
+
 
 end

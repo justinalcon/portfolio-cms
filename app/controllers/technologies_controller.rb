@@ -14,7 +14,6 @@ class TechnologiesController < ApplicationController
 
   def show
     if params['token'] && User.find_by_session_token(params['token'])
-      # if there is no user for this session, unset the spark
       @techs = Technology.find(params[:id])
       respond_with_success
     else
@@ -26,7 +25,7 @@ class TechnologiesController < ApplicationController
 
   def respond_with_success
     respond_to do |format|
-      format.json { render :json => @techs.to_json(include: [:expertise, :organizations, :projects, :specialties]), callback: params[:jsoncallback] }
+      format.json { render :json => @techs.to_json(include: [:images, :expertise, :organizations, :projects, :specialties]), callback: params[:jsoncallback] }
       format.html { redirect_to('/admin') }
     end
   end
