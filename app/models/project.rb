@@ -10,4 +10,5 @@ class Project < ActiveRecord::Base
   has_many :expertise_projects
   has_many :expertise, through: :expertise_projects
 
+  has_many :images, :dependent => :destroy, :inverse_of => :project
 end

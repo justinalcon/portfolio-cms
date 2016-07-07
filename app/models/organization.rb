@@ -10,4 +10,6 @@ class Organization < ActiveRecord::Base
   has_many :organization_projects
   has_many :projects, through: :organization_projects
 
+  has_many :images, :dependent => :destroy, :inverse_of => :organization
+
 end

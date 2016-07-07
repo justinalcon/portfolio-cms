@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707142304) do
+ActiveRecord::Schema.define(version: 20160707150812) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -46,10 +46,13 @@ ActiveRecord::Schema.define(version: 20160707142304) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string  "name",          limit: 255
-    t.string  "location",      limit: 255
-    t.integer "technology_id", limit: 4
-    t.integer "specialty_id",  limit: 4
+    t.string  "name",            limit: 255
+    t.string  "location",        limit: 255
+    t.integer "technology_id",   limit: 4
+    t.integer "specialty_id",    limit: 4
+    t.integer "expertise_id",    limit: 4
+    t.integer "organization_id", limit: 4
+    t.integer "project_id",      limit: 4
   end
 
   create_table "organization_projects", force: :cascade do |t|

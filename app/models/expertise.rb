@@ -9,4 +9,6 @@ class Expertise < ActiveRecord::Base
   has_many :specialties, through: :expertise_specialties
   has_many :expertise_projects
   has_many :projects, through: :expertise_projects
+
+  has_many :images, :dependent => :destroy, :inverse_of => :expertise
 end

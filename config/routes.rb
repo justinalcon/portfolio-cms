@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :technologies
   resources :specialties
+  resources :projects
+  resources :organizations
+  resources :expertise
+
 
   root to: 'rails_admin/main#dashboard' 
 
