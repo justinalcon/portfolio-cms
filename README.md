@@ -1,6 +1,6 @@
 ¸.·´¯`·.´¯`·.¸¸.·´¯`·.¸><(((º>
 
-  This is the CMS that controls the portfolio front end
+  This is the CMS that controls the portfolio [front end](https://github.com/justinalcon/portfolio-cms).
         
 # Deploying to Ubuntu 14.04
   
