@@ -73,6 +73,10 @@ RailsAdmin.config do |config|
     visible false
   end
 
+  config.model 'Image' do
+    visible false
+  end
+
   config.model 'Technology' do
     configure :organization_technologies do
       hide
