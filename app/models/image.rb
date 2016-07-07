@@ -1,5 +1,6 @@
 class Image < ActiveRecord::Base
   belongs_to :technology, :inverse_of => :images
+  belongs_to :specialty, :inverse_of => :images
 
   validates_presence_of :location
 

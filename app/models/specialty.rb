@@ -10,4 +10,6 @@ class Specialty < ActiveRecord::Base
   has_many :project_specialties
   has_many :projects, through: :project_specialties
 
+  has_many :images, :dependent => :destroy, :inverse_of => :technology
+
 end
